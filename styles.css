@@ -1,0 +1,300 @@
+:root{
+	/* Color palette (pastel on black/red shades) */
+	--bg:#0f0f10; /* near-black background */
+	--panel:#141416; /* slightly lighter panel */
+	--accent:#b34b4b; /* muted red */
+	--accent-2:#8f2f2f; /* deeper red */
+	--muted:#cfc7c7; /* pale text */
+	--muted-2:#9f9b9b; /* secondary text */
+	--glass:rgba(255,255,255,0.02);
+	--glass-2:rgba(255,255,255,0.03);
+	--success:#6bbf7a;
+	--danger:#e05b5b;
+	--focus: 0 0 0.6rem rgba(179,75,75,0.12);
+
+	/* Typography */
+	--font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	--base-size:16px;
+	--radius:12px;
+	--max-width:1100px;
+
+	/* utility */
+	--container-padding:20px;
+}
+
+/* Base reset */
+*{
+	box-sizing:border-box;
+}
+html,body{
+	height:100%;
+	margin:0;
+	background:linear-gradient(180deg,var(--bg),#0b0b0b);
+	color:var(--muted);
+	font-family:var(--font-family);
+	font-size:var(--base-size);
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+/* Layout */
+.site-header{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:16px var(--container-padding);
+	background:linear-gradient(180deg,var(--panel), rgba(255,255,255,0.02));
+	border-bottom:1px solid rgba(255,255,255,0.03);
+	position:sticky;
+	top:0;
+	z-index:50;
+	backdrop-filter: blur(6px);
+}
+.site-brand{
+	display:flex;
+	align-items:center;
+	gap: 14px;
+}
+.site-title{
+	margin:0;
+	font-size:1.25rem;
+	letter-spacing:0.6px;
+	color:var(--muted);
+}
+.site-subtitle{
+	margin-top:4px;
+	color:var(--muted-2);
+	font-size:0.8rem;
+}
+
+/* Navigation */
+.site-nav{
+	display:flex;
+	align-items:center;
+}
+.nav-toggle{
+	display:none;
+	background:transparent;
+	color:var(--muted);
+	border:1px solid rgba(255,255,255,0.03);
+	padding:8px 10px;
+	border-radius:8px;
+	cursor:pointer;
+}
+.nav-list{
+	display:flex;
+	list-style:none;
+	margin:0;
+	padding:0;
+	gap:10px;
+}
+.nav-list a{
+	display:inline-block;
+	padding:8px 12px;
+	border-radius:8px;
+	text-decoration:none;
+	color:var(--muted);
+	font-weight:600;
+	transition:all .15s ease;
+}
+.nav-list a:hover{
+	transform:translateY(-2px);
+	box-shadow:var(--focus);
+	background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.015));
+}
+
+/* Main container */
+.app{
+	max-width:var(--max-width);
+	margin:28px auto;
+	padding:var(--container-padding);
+}
+
+/* Panels (cards) — теперь явно поверх seasonal canvas */
+.card{
+	background:linear-gradient(180deg,var(--glass),var(--glass-2));
+	border-radius:var(--radius);
+	padding:18px;
+	border:1px solid rgba(255,255,255,0.03);
+	box-shadow:0 6px 18px rgba(0,0,0,0.5);
+
+	position: relative;
+	z-index: 20;
+}
+
+
+/* Typography unified rules */
+h1,h2,h3,p,small{
+	font-family:var(--font-family);
+	color:var(--muted);
+	margin:0 0 12px 0;
+}
+h1{
+	font-size:1.6rem;
+}
+h2{
+	font-size:1.25rem;
+}
+h3{
+	font-size:1rem;
+}
+p{
+	line-height:1.5;
+	font-size:0.98rem;
+	color:var(--muted);
+}
+small{
+	color:var(--muted-2);
+	font-size:0.82rem;
+}
+
+/* Separator class (for '---') */
+.separator{
+	height:1px;
+	background:linear-gradient(90deg,transparent,var(--accent),transparent);
+	margin:12px 0;
+	border-radius:6px;
+}
+
+/* Steam collection demo */
+.grid{
+	display:grid;
+	grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+	gap:16px;
+}
+.steam-card{
+	display:flex;
+	flex-direction:column;
+	gap:12px;
+}
+.steam-card .thumb{
+	height:140px;
+	border-radius:10px;
+	background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	border:1px solid rgba(255,255,255,0.03);
+	overflow:hidden;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.steam-card img{ max-width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Simple table component */
+.simple-table{
+	width:100%;
+	border-collapse:collapse;
+	background:transparent;
+	border-radius:10px;
+	overflow:hidden;
+}
+.simple-table th,
+.simple-table td{
+	padding:12px 14px;
+	text-align:left;
+	border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.simple-table th{
+	background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));
+	font-weight:700;
+}
+
+/* Floating button (default bottom-right) */
+.floating-actions{
+	position:fixed;
+	right:20px;
+	bottom:20px;
+	z-index:60;
+	display:flex;
+	flex-direction:column;
+	gap:10px;
+}
+.floating-button{
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	min-width:56px;
+	height:56px;
+	padding:0 14px;
+	border-radius:28px;
+	background:linear-gradient(180deg,var(--accent),var(--accent-2));
+	color:white;
+	text-decoration:none;
+	font-weight:700;
+	box-shadow:0 8px 26px rgba(0,0,0,0.6);
+	transition:transform .12s ease;
+}
+.floating-button:active{ transform:scale(.98); }
+
+/* Footer */
+.site-footer{
+	padding:18px var(--container-padding);
+	text-align:center;
+	border-top:1px solid rgba(255,255,255,0.02);
+	color:var(--muted-2);
+}
+
+/* Responsive nav */
+@media (max-width:880px){
+	.nav-toggle{ display:block; }
+	.nav-list{
+		position:absolute;
+		right:16px;
+		top:64px;
+		background:linear-gradient(180deg,var(--panel),rgba(255,255,255,0.01));
+		border-radius:12px;
+		padding:12px;
+		flex-direction:column;
+		display:none;
+		min-width:180px;
+	}
+	.nav-list.show{ display:flex; }
+}
+
+/* Small helpers */
+.kv{ display:flex; gap:12px; align-items:center; }
+.badge{ padding:6px 8px; border-radius:8px; font-weight:700; font-size:.85rem; background:rgba(255,255,255,0.02); color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
+
+/* Accessibility focus */
+a:focus, button:focus{ outline:none; box-shadow:var(--focus); border-radius:8px; }
+
+/* --- гарантируем, что seasonal canvas будет под карточками --- */
+#seasonal-overlay {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;   /* фон — самый низкий уровень */
+	overflow: hidden;
+}
+
+/* покрывающий канвас */
+#seasonal-canvas {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* весь основной контент над фоном */
+#app {
+	position: relative; /* нужен контекст для карточек */
+	z-index: 1;
+}
+
+.site-logo{
+	width:48px;
+	height:48px;
+	border-radius:8px;
+	object-fit:cover;
+	border:1px solid rgba(255,255,255,0.04);
+	box-shadow:0 6px 16px rgba(0,0,0,0.45);
+	/* ensure avatar is above seasonal canvas */
+	position:relative;
+	z-index: 1002; /* header already high, but extra safety */
+}
+
+/* оставляем хедер и плавающие кнопки выше всех, как было */
+.site-header { z-index: 50; position: sticky; } 
+.floating-actions { z-index: 60; position: fixed; pointer-events: auto; }
+
